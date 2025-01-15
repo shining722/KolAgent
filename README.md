@@ -124,7 +124,7 @@ Web3.0 thrives on collaboration! Join us in developing the KOL Intelligent Agent
 
 ## 📬 Contact  
 
-- **Maintainer:** [Your GitHub Username]  
-- **Email:** [Your Email Address]  
+- **Maintainer:** [shining722]  
+- **Telegram:** [@shining722]  
 
 🌟 Thank you for supporting the KOL Intelligent Agent Framework! Together, let’s shape the future of Web3.0!  
