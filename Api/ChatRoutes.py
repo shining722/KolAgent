@@ -8,9 +8,32 @@ import Agents.Agents
 api_key=Agents.Agents.KIMI_API_KEY
 base_url=Agents.Agents.KIMI_BASE_URL
 
+deepseek_api_key=Agents.Agents.DEEPSEEK_API_KEY
+deepseek_url=Agents.Agents.KIMI_BASE_URL
+
 
 
 chat_bp = Blueprint('chat', __name__)
+
+#deepseek json格式输出接口
+@chat_bp.route('/deepseek/chat_with_json', methods=['POST'])
+def chat_with_json():
+    client = OpenAI(
+        api_key=deepseek_api_key,
+        base_url=deepseek_url,
+    )
+    user_input = request.json.get('message')
+    messages = [
+        {"role": "system", "content": "You are a helpful AI."},
+        {"role": "user", "content": user_input}
+    ]
+    completion = client.chat.completions.create(
+        model="deepseek-chat",
+        messages=messages,
+        temperature=0.3,
+    )
+    response_content = completion.choices[0].message.content
+    return jsonify({'reply':response_content})
 
 #json格式输出接口
 @chat_bp.route('/kimi/chat_with_json', methods=['POST'])
