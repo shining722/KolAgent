@@ -17,7 +17,7 @@ chat_bp = Blueprint('chat', __name__)
 
 #deepseek json格式输出接口
 @chat_bp.route('/deepseek/chat_with_json', methods=['POST'])
-def chat_with_json():
+def deepseek_chat_with_json():
     client = OpenAI(
         api_key=deepseek_api_key,
         base_url=deepseek_url,
@@ -37,7 +37,7 @@ def chat_with_json():
 
 #json格式输出接口
 @chat_bp.route('/kimi/chat_with_json', methods=['POST'])
-def chat_with_json():
+def kimi_chat_with_json():
     client = OpenAI(
         api_key=api_key,
         base_url=base_url,
@@ -58,7 +58,7 @@ def chat_with_json():
 
 #流式输出接口
 @chat_bp.route('/kimi/chat_with_stream', methods=['POST'])
-def chat_with_stream():
+def kimi_chat_with_stream():
     client = OpenAI(
         api_key=api_key,
         base_url=base_url,

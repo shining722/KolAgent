@@ -2,12 +2,16 @@
 
 from flask import Blueprint
 import tweepy
+import configparser
 
 auth_bp = Blueprint('auth', __name__)
+# 读取配置文件
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 @auth_bp.route('/twitter/auth')
 def twitter_auth():
-    bearer_token = '你的Bearer Token'
+    bearer_token = config['twitter']['bearer_token']
     client = tweepy.Client(bearer_token=bearer_token)
     # 使用Client对象进行操作，例如搜索推文
     tweets = client.search_recent_tweets(query='twitter', max_results=10)
