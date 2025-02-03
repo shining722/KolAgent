@@ -5,13 +5,16 @@ from Storage.Redis.RedisConfig import RedisConfig
 from Api.AuthRoutes import auth_bp
 from Api.ChatRoutes import chat_bp
 from flask_redis import FlaskRedis
-app = Flask(__name__)
+from App import create_app
+app = create_app()
+# app = Flask(__name__)
+#
+# #Postgresql初始化
+# app.config['SQLALCHEMY_DATABASE_URI'] = Config.SQLALCHEMY_DATABASE_URI
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = Config.SQLALCHEMY_TRACK_MODIFICATIONS
+# #初始化SQLAlchemy
+# db = SQLAlchemy(app)
 
-#Postgresql初始化
-app.config['SQLALCHEMY_DATABASE_URI'] = Config.SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = Config.SQLALCHEMY_TRACK_MODIFICATIONS
-#初始化SQLAlchemy
-db = SQLAlchemy(app)
 #初始化redis
 app.config['REDIS_URL'] =RedisConfig.REDIS_URI
 redis_store = FlaskRedis(app)
