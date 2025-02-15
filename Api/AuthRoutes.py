@@ -4,6 +4,7 @@ from flask import Blueprint, Flask, request, jsonify, Response, stream_with_cont
 import tweepy
 import configparser
 from Services import TweepyService
+from Services import XService
 from Models.Users import User
 
 tweepy_service = TweepyService
@@ -12,6 +13,11 @@ auth_bp = Blueprint('auth', __name__)
 # 读取配置文件
 config = configparser.ConfigParser()
 config.read('config.ini')
+
+@auth_bp.route('/x/get_state_code_challenge')
+def x_get_state_code_challenge():
+    state,code_challenge = XService.get_state_code_challenge()
+    return jsonify(state=state, code_challenge=code_challenge)
 
 @auth_bp.route('/x/auth')
 def twitter_auth():
