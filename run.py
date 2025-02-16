@@ -2,16 +2,22 @@ from Storage.Redis.RedisClient import get_redis_client
 from Api.AuthRoutes import auth_bp
 from Api.ChatRoutes import chat_bp
 from Api.TestRoutes import test_routes
+
+import configparser
+# 读取配置文件
+config = configparser.ConfigParser()
+config.read('config.ini')
+
 from App import create_app
 app = create_app()
 # 配置 Redis 连接信息
-app.config["REDIS_HOST"] = "103.126.211.100"
-
-app.config["REDIS_PORT"] = 6379
-app.config["REDIS_DB"] = 0
-app.config["REDIS_PASSWORD"] = "q46DrEda2"
+app.config["REDIS_HOST"] = config['redis']['url']
+app.config["REDIS_PORT"] = config['redis']['port']
+app.config["REDIS_DB"] = config['redis']['db']
+app.config["REDIS_PASSWORD"] = config['redis']['password']
 
 # 初始化 Redis 客户端
+
 app.redis_client = get_redis_client(app)
 
 #蓝图接口注册

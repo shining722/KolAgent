@@ -18,6 +18,7 @@ def get_key(key):
     else:
         return jsonify({"error": f"Key '{key}' not found"}), 404
 
+
 def delete_key(key):
     if current_app.redis_client.delete(key):
         return jsonify({"message": f"Key '{key}' deleted"})
